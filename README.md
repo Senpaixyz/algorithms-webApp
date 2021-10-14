@@ -15,7 +15,9 @@ use.
 - Decision Tree - for loan charges prediction
 
 #### Installation
-1st Create Virtual Environment from Pycharm.
+```sh
+Create Virtual Environment from Pycharm.
+```
 2nd Install all the requirements needed:
 
 ```sh
