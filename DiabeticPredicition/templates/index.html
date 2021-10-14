@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetic Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-div" style="background-color: #54c2bf;">
+    <span class="navbar-brand text-light mx-auto d-block">DIABETIC EARLY PREDICTION</span>
+  </nav>
+<div class="container">
+    <div class="row">
+
+    <div class="col-md-6 col-sm-12 col-xs-12 mt-5">
+        <form action="{{ url_for('predict')}}" method="post">
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label>PERSON NAME</label>
+                      <input type="text" class="form-control" name="Name" required>
+                  </div>
+                <div class="form-group col-md-4">
+                    <label>AGE</label>
+                     <input type="number" class="form-control"min="1" max="90" name="Age" required>
+                </div>
+                 <div class="form-group col-md-4">
+                    <label>BMI</label>
+                     <input type="number" class="form-control" name="BMI" required>
+                </div>
+                      <div class="form-group col-md-4">
+                    <label>BLOOD PRESSURE</label>
+                     <input type="number" class="form-control" name="BloodPressure" required>
+                </div>
+                     <div class="form-group col-md-12 mb-4">
+                        <label><span class="text-secondary">Other Personal Details</span></label>
+                    </div>
+                    <div class="form-group col-md-5 mb-4">
+                        <label>NO. PREGNANCIES <span class="text-secondary"> (if any)</span></label>
+                         <input type="number" class="form-control" name="Pregnancies" required>
+                    </div>
+                    <div class="form-group col-md-4 mb-4">
+                        <label>INSULIN</label>
+                         <input type="number" class="form-control" name="Insulin" required>
+                    </div>
+                    <div class="form-group col-md-3 mb-4">
+                        <label>SKIN THICKNESS</label>
+                         <input type="number" class="form-control" name="SkinThickness" required>
+                    </div>
+                    <div class="form-group col-md-5 mb-4">
+                        <label>GLUCOSE</label>
+                         <input type="number" class="form-control" name="Glucose" required>
+                    </div>
+                     <div class="form-group col-md-7 mb-4">
+                        <label>DIABETES PEDIGREE FUNCTION</label>
+                         <input type="number" class="form-control" name="DiabetesPedigreeFunction" required>
+                    </div>
+                    <div class="form-group col-md-12 mt-5">
+                         <input type="submit" value="START TO PREDICT" class="btn text-white mx-auto d-block w-100" style="background-color: #fd7778">
+                     </div>
+            </div>
+
+        </form>
+    </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 mt-5">
+
+            <img src="../static/img/img.jpg" class="img-fluid mx-auto d-block" style="width:70%"/>
+              {% if prediction_text|length > 0: %}
+                <div class="alert {{alert_label}} text-center" role="alert">
+                    <h5 class="display-4 text-left" style="font-size:20px;">  {{ prediction_text }}</h5>
+                </div>
+            {% endif %}
+        </div>
+</div>
+</div>
+
+
+<script>
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

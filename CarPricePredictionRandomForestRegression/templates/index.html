@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-primary">
+    <span class="navbar-brand text-light mx-auto d-block">CAR PRICE PREDICTION</span>
+  </nav>
+<div class="container">
+    <div class="col-md-12 col-sm-12 col-xs-12 mt-3">
+            {% if prediction_text|length > 0: %}
+                <div class="alert alert-primary text-center" role="alert">
+                    {{ prediction_text }}
+                </div>
+            {% endif %}
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 mt-2">
+        <form action="{{ url_for('predict')}}" method="post">
+
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label>Car Manufacturer</label>
+                    <select id="make" name="make" class="form-control" required>
+                          <option value="0" selected>Alfa-romero</option>
+                          <option value="1">Audi</option>
+                          <option value="2">BMW</option>
+                          <option value="3">Chevrolet</option>
+                          <option value="4">Dodge</option>
+                          <option value="5">Honda</option>
+                         <option value="6">Isuzu</option>
+                         <option value="7">Jaguar</option>
+                         <option value="8">Mazda</option>
+                          <option value="9">Mercedes-Benz</option>
+                          <option value="10">Marcury</option>
+                        <option value="11">Mitsubishi</option>
+                        <option value="12">Nissan</option>
+                        <option value="13">Peugot</option>
+                        <option value="14">Plymouth</option>
+                        <option value="15">Porsche</option>
+                        <option value="16">Renault</option>
+                        <option value="17">Saab</option>
+                        <option value="18">Subaru</option>
+                        <option value="19">Toyota</option>
+                        <option value="20">Volkswagen</option>
+                         <option value="21">Volvo</option>
+                    </select>
+                  </div>
+                    <div class="form-group col-md-3">
+                    <label>Fuel Type</label>
+                      <select  name="fuel_type" class="form-control" required>
+                          <option value="0" selected>Diesel</option>
+                          <option value="1">Gas</option>
+                      </select>
+                  </div>
+                     <div class="form-group col-md-1">
+                    <label>Aspiration</label>
+                     <select  name="aspiration" class="form-control" required>
+                          <option value="0" selected>STD</option>
+                          <option value="1">TURBO</option>
+                      </select>
+                  </div>
+                    <div class="form-group col-md-2">
+                    <label>No of Doors</label>
+                    <select  name="num_of_doors" class="form-control" required>
+                          <option value="0" selected>4</option>
+                          <option value="1">2</option>
+                      </select>
+                  </div>
+                    <div class="form-group col-md-3">
+                    <label>Body Style</label>
+                         <select  name="body_style" class="form-control" required>
+                              <option value="0" selected>Convertible</option>
+                              <option value="2">Hatchback</option>
+                              <option value="3">Sedan</option>
+                              <option value="4">Wagon</option>
+                              <option value="1">Hardtop</option>
+                         </select>
+                  </div>
+                </div>
+            <div class="form-row">
+                 <div class="form-group col-md-3">
+                    <label>Drive Wheel</label>
+                         <select  name="drive_wheels" class="form-control" required>
+                              <option value="2" selected>RWD</option>
+                              <option value="1">FWD</option>
+                              <option value="0">4WD</option>
+                         </select>
+                  </div>
+                 <div class="form-group col-md-3">
+                    <label>Engine Location</label>
+                       <select  name="engine_location" class="form-control" required>
+                              <option value="0" selected>Front Location</option>
+                              <option value="1">Rear Location</option>
+                         </select>
+                  </div>
+                 <div class="form-group col-md-3">
+                     <label >Wheel Base <span class="text-secondary">(86-120)</span></label>
+                    <input type="number" class="form-control" min="86" max="120"  name="wheel_base" required>
+                  </div>
+                 <div class="form-group col-md-3">
+                    <label>Curve Weight <span class="text-secondary">(1488-4066)</span></label>
+                    <input type="number" class="form-control"min="1488" max="4066" name="curb_weight" required>
+                  </div>
+            </div>
+            <div class="form-row">
+                 <div class="form-group col-md-3">
+                    <label>Engine Type</label>
+                      <select  name="engine_type" class="form-control" required>
+                              <option value="0" selected>DOHC</option>
+                              <option value="5">OHCV</option>
+                              <option value="3">OHC</option>
+                              <option value="2">L</option>
+                              <option value="6">ROTOR</option>
+                              <option value="4">OHCF</option>
+                              <option value="1">DOHCV</option>
+                         </select>
+                  </div>
+                 <div class="form-group col-md-3">
+                    <label>No. Cylinders</label>
+                         <select  name="num_of_cylinders" class="form-control" required>
+                              <option value="6" selected>TWO</option>
+                              <option value="4">THREE</option>
+                              <option value="2">FOUR</option>
+                              <option value="1">FIVE</option>
+                              <option value="3">SIX</option>
+                              <option value="0">EIGHT</option>
+                              <option value="5">TWELVE</option>
+                         </select>
+                 </div>
+                  <div class="form-group col-md-3">
+                      <label>Engine Size <span class="text-secondary">(61-326)</span></label>
+                      <input type="number" class="form-control"min="61" max="326" name="engine_size" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label>Fuel System</label>
+                         <select  name="fuel_system" class="form-control" required>
+                              <option value="5" selected>MPFI</option>
+                              <option value="1">2BBL</option>
+                              <option value="4">MFI</option>
+                              <option value="0">1BBL</option>
+                              <option value="7">SPFI</option>
+                              <option value="2">4BBL</option>
+                              <option value="3">IDI</option>
+                             <option value="6">SPDI</option>
+                         </select>
+                  </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label>Compression Ratio <span class="text-secondary">(7-23)</span></label>
+                      <input type="number" class="form-control"min="7" max="23" name="compression_ratio" required>
+                </div>
+                 <div class="form-group col-md-2">
+                    <label>Horse Power  <span class="text-secondary">(48-343)</span></label>
+                     <input type="number" class="form-control"min="48" max="343" name="horsepower" required>
+                 </div>
+                <div class="form-group col-md-3">
+                    <label>Peak RPM <span class="text-secondary">(3333-6600)</span></label>
+                     <input type="number" class="form-control"min="3333" max="6600" name="peak_rpm" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Length <span class="text-secondary">(m)</span></label>
+                     <input type="number" class="form-control"name="length" required>
+                </div>
+                <div class="form-group col-md-1">
+                    <label>Width <span class="text-secondary">(m)</span></label>
+                     <input type="number" class="form-control"name="width" required>
+                </div>
+                 <div class="form-group col-md-1">
+                    <label>Height <span class="text-secondary">(m)</span></label>
+                     <input type="number" class="form-control" name="height" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label>City MPG <span class="text-secondary">(13-49)</span></label>
+                     <input type="number" class="form-control"min="13" max="49" name="city_mpg" required>
+                </div>
+                 <div class="form-group col-md-3">
+                       <label>Highway MPG <span class="text-secondary">(16-54)</span></label>
+                     <input type="number" class="form-control"min="16" max="54" name="highway_mpg" required>
+                </div>
+            </div>
+                 <div class="form-row">
+                     <div class="form-group col-md-12">
+                         <input type="submit" value="Predict Price" class="btn btn-primary mx-auto d-block w-50">
+                     </div>
+                 </div>
+        </form>
+    </div>
+
+</div>
+
+
+<script>
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
